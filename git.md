@@ -20,3 +20,6 @@ upload the code with some comments
 completed
 
 PS:这只是个人使用时，备份自己代码的一些方法，绝对不是git的完全使用方法！！！
+
+参考链接 
+    [用 Git 上传项目到 GitHub](http://www.jianshu.com/p/0fce531dba31)
