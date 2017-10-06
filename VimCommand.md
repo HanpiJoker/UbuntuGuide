@@ -101,7 +101,9 @@ O/o   -- insert new line above/below current line and insert
 3. :reg  
 > You can use :reg to open you register lists, and you can find what things 
 > in the registers。you can also use "< num > to choose the register, and then  
-> you can use "< num >p to paste the words in the regiseter 5. It's so interesting!!  
+> you can use "< num >p to paste the words in the regiseter 
+
+**It's so interesting!!** 
 
 ### 3. Plugins
 Some Great Plugins I use:
