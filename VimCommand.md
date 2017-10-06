@@ -96,11 +96,12 @@ O/o   -- insert new line above/below current line and insert
 2. Play a macro
 > @{register}
 
-(ps: press m-key to set a tag named key, then you can press "tilde-key" to go back) [ tilde means '~' ]  
-3. :reg
-You can use :reg to open you register lists, and you can find what things  
-in the registers。you can also use "< num > to choose the register, and then  
-you can use "< num >p to paste the words in the regiseter 5. It's so interesting!!  
+(ps: press m-key to set a tag named key, then you can press "tilde-key" to go back) [ tilde means '~' ] 
+
+3. :reg  
+> You can use :reg to open you register lists, and you can find what things 
+> in the registers。you can also use "< num > to choose the register, and then  
+> you can use "< num >p to paste the words in the regiseter 5. It's so interesting!!  
 
 ### 3. Plugins
 Some Great Plugins I use:
