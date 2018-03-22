@@ -150,6 +150,8 @@ Plug 'joker1007/vim-markdown-quote-syntax'
 Plug 'iamcco/markdown-preview.vim'
 
 Plug 'wesleyche/SrcExpl'
+"搜索插件
+Plug 'dkprice/vim-easygrep'
 
 " 插件列表结束
 call plug#end()
@@ -458,7 +460,7 @@ let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax=1
 
 let g:ycm_server_python_interpreter='/usr/bin/python2.7'
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 "离开插入模式后自动关闭预览窗口"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -620,7 +622,7 @@ let g:ale_linters = {'c': ['cppcheck'], }
 
 
 " airline 配置
-let g:airline_powerline_fonts = 1   
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 "tabline中当前buffer两端的分隔字符
 let g:airline#extensions#tabline#left_sep = ':'
@@ -641,24 +643,24 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
-let g:rbpt_colorpairs = [ 
-    \['brown', 'RoyalBlue3'], 
-    \['Darkblue', 'SeaGreen3'],
-    \['darkgray', 'DarkOrchid3'],
-    \['darkgreen', 'firebrick3'],
-    \['darkcyan', 'RoyalBlue3'], 
-    \['darkred', 'SeaGreen3'],
-    \['darkmagenta', 'DarkOrchid3'],
-    \['brown', 'firebrick3'],
-    \['gray', 'RoyalBlue3'],
-    \['black', 'SeaGreen3'],
-    \['darkmagenta', 'DarkOrchid3'],
-    \['Darkblue', 'firebrick3'],
-    \['darkgreen', 'RoyalBlue3'],
-    \['darkcyan', 'SeaGreen3'],
-    \['darkred', 'DarkOrchid3'],
-    \['red', 'firebrick3'],
-    \]
+let g:rbpt_colorpairs = [
+            \['brown', 'RoyalBlue3'],
+            \['Darkblue', 'SeaGreen3'],
+            \['darkgray', 'DarkOrchid3'],
+            \['darkgreen', 'firebrick3'],
+            \['darkcyan', 'RoyalBlue3'],
+            \['darkred', 'SeaGreen3'],
+            \['darkmagenta', 'DarkOrchid3'],
+            \['brown', 'firebrick3'],
+            \['gray', 'RoyalBlue3'],
+            \['black', 'SeaGreen3'],
+            \['darkmagenta', 'DarkOrchid3'],
+            \['Darkblue', 'firebrick3'],
+            \['darkgreen', 'RoyalBlue3'],
+            \['darkcyan', 'SeaGreen3'],
+            \['darkred', 'DarkOrchid3'],
+            \['red', 'firebrick3'],
+            \]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle=0
 au VimEnter * RainbowParenthesesToggle
@@ -721,19 +723,19 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 "##### auto fcitx  ###########
 let g:input_toggle = 1
 function! Fcitx2en()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status == 2
-      let g:input_toggle = 1
-      let l:a = system("fcitx-remote -c")
-   endif
+    let s:input_status = system("fcitx-remote")
+    if s:input_status == 2
+        let g:input_toggle = 1
+        let l:a = system("fcitx-remote -c")
+    endif
 endfunction
 
 function! Fcitx2zh()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status != 2 && g:input_toggle == 1
-      let l:a = system("fcitx-remote -o")
-      let g:input_toggle = 0
-   endif
+    let s:input_status = system("fcitx-remote")
+    if s:input_status != 2 && g:input_toggle == 1
+        let l:a = system("fcitx-remote -o")
+        let g:input_toggle = 0
+    endif
 endfunction
 
 set ttimeoutlen=150
@@ -743,46 +745,54 @@ autocmd InsertLeave * call Fcitx2en()
 autocmd InsertEnter * call Fcitx2zh()
 "##### auto fcitx end ######
 
-" // The switch of the Source Explorer 
-nmap <Leader>src :SrcExplToggle<CR> 
+" // The switch of the Source Explorer
+nmap <Leader>src :SrcExplToggle<CR>
 
-" // Set the height of Source Explorer window 
-let g:SrcExpl_winHeight = 8 
+" // Set the height of Source Explorer window
+let g:SrcExpl_winHeight = 8
 
-" // Set 100 ms for refreshing the Source Explorer 
-let g:SrcExpl_refreshTime = 100 
+" // Set 100 ms for refreshing the Source Explorer
+let g:SrcExpl_refreshTime = 100
 
-" // Set "Enter" key to jump into the exact definition context 
-let g:SrcExpl_jumpKey = "<ENTER>" 
+" // Set "Enter" key to jump into the exact definition context
+let g:SrcExpl_jumpKey = "<ENTER>"
 
-" // Set "Space" key for back from the definition context 
-let g:SrcExpl_gobackKey = "<SPACE>" 
+" // Set "Space" key for back from the definition context
+let g:SrcExpl_gobackKey = "<SPACE>"
 
 " // In order to avoid conflicts, the Source Explorer should know what plugins
 " // except itself are using buffers. And you need add their buffer names into
 " // below listaccording to the command ":buffers!"
-let g:SrcExpl_pluginList = [ 
-        \ "__Tag_List__", 
-        \ "_NERD_tree_" 
-    \ ] 
+let g:SrcExpl_pluginList = [
+            \ "__Tag_List__",
+            \ "_NERD_tree_"
+            \ ]
 
-" // Enable/Disable the local definition searching, and note that this is not 
-" // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
-" // It only searches for a match with the keyword according to command 'gd' 
-let g:SrcExpl_searchLocalDef = 1 
+" // Enable/Disable the local definition searching, and note that this is not
+" // guaranteed to work, the Source Explorer doesn't check the syntax for now.
+" // It only searches for a match with the keyword according to command 'gd'
+let g:SrcExpl_searchLocalDef = 1
 
-" // Do not let the Source Explorer update the tags file when opening 
-let g:SrcExpl_isUpdateTags = 0 
+" // Do not let the Source Explorer update the tags file when opening
+let g:SrcExpl_isUpdateTags = 0
 
-" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
-" // create/update the tags file 
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
+" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
+" // create/update the tags file
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
 
-" // Set "<F12>" key for updating the tags file artificially 
-let g:SrcExpl_updateTagsKey = "<F12>" 
+" // Set "<F12>" key for updating the tags file artificially
+let g:SrcExpl_updateTagsKey = "<F12>"
 
-" // Set "<F3>" key for displaying the previous definition in the jump list 
-let g:SrcExpl_prevDefKey = "<F3>" 
+" // Set "<F3>" key for displaying the previous definition in the jump list
+let g:SrcExpl_prevDefKey = "<F3>"
 
-" // Set "<F4>" key for displaying the next definition in the jump list 
-let g:SrcExpl_nextDefKey = "<F4>" 
+" // Set "<F4>" key for displaying the next definition in the jump list
+let g:SrcExpl_nextDefKey = "<F4>"
+
+"easygrep
+let g:EasyGrepMode = 3     " All:0, Open Buffers:1, TrackExt:2, 
+let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
+let g:EasyGrepRecursive  = 1 " Recursive searching
+let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
+let g:EasyGrepFilesToExclude = "*.bak, cscope.*, *.a, *.o, *.pyc"
+let g:EasyGrepDefaultUserPattern = "*.c *.h *.s *.S"
