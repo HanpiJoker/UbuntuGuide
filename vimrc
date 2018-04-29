@@ -117,7 +117,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'gcmt/wildfire.vim'
 " 历史操作列表
 Plug 'sjl/gundo.vim'
-Plug 'lilydjwg/fcitx.vim'
+" Plug 'lilydjwg/fcitx.vim'
 Plug 'godlygeek/tabular'
 
 " 为指定文本加括号
@@ -150,8 +150,13 @@ Plug 'joker1007/vim-markdown-quote-syntax'
 Plug 'iamcco/markdown-preview.vim'
 
 Plug 'wesleyche/SrcExpl'
+
 "搜索插件
 Plug 'dkprice/vim-easygrep'
+Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+
+" 有道翻译
+Plug 'ianva/vim-youdao-translater'
 
 " 插件列表结束
 call plug#end()
@@ -257,8 +262,8 @@ nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 " 代码折叠
 
 " 基于缩进或语法进行代码折叠
-"set foldmethod=indent
-set foldmethod=syntax
+set foldmethod=manual
+" set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
 
@@ -378,8 +383,8 @@ let g:ctrlsf_ackprg = 'ag'
 " 内容替换
 
 " 快捷替换
-let g:multi_cursor_next_key='<S-n>'
-let g:multi_cursor_skip_key='<S-k>'
+let g:multi_cursor_next_key='<S-x>'
+let g:multi_cursor_skip_key='<S-u>'
 
 " 精准替换
 " 替换函数。参数说明：
@@ -439,7 +444,7 @@ let g:ycm_complete_in_comments=1
 let g:ycm_confirm_extra_conf=0
 
 " 开启 YCM 标签补全引擎
-let g:ycm_collect_identifiers_from_tags_files=0
+let g:ycm_collect_identifiers_from_tags_files=1
 "" 引入 C++ 标准库 tags
 "set tags+=/data/misc/software/app/vim/stdcpp.tags
 "set tags+=/data/misc/software/app/vim/sys.tags
@@ -452,15 +457,18 @@ set completeopt-=preview
 
 " 从第一个键入字符就开始罗列匹配项
 let g:ycm_min_num_of_chars_for_completion=1
+let g:ycm_auto_trigger = 1
 
-" 禁止缓存匹配项，每次都重新生成匹配项
-let g:ycm_cache_omnifunc=0
+set omnifunc=syntaxcomplete#Complete
+
+" 允许缓存匹配项，每次都重新生成匹配项
+let g:ycm_cache_omnifunc=1
 
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 
-let g:ycm_server_python_interpreter='/usr/bin/python2.7'
-" let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter='/usr/bin/python3.6'
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 "离开插入模式后自动关闭预览窗口"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -472,7 +480,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_complete_in_comments=1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-" 关闭YCM的语义检测
+" 打开YCM的语义检测
 let g:ycm_show_diagnostics_ui = 0
 " <<
 " >>
@@ -630,6 +638,7 @@ let g:airline#extensions#tabline#left_sep = ':'
 let g:airline#extensions#tabline#left_alt_sep = '|'
 "tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 nnoremap <Leader>bp :bp<CR>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bd :bd<CR>
@@ -671,15 +680,9 @@ au Syntax * RainbowParenthesesLoadBraces
 
 let g:Lf_ShortcutF = '<C-P>'
 
-let g:sneak#s_next = 1
+let g:sneak#label = 1
 
-" vim Markdown
-let g:vim_markdown_autowrite = 1  " save any edit automatically
-let g:vim_markdown_no_extensions_in_markdown = 1
-" let g:markdown_enable_conceal = 1
-let g:vim_markdown_toc_autofit = 1
-
-let g:mkdp_path_to_chrome = "/usr/bin/chromium"
+let g:mkdp_path_to_chrome = "/usr/bin/google-chrome-stable"
 " path to the chrome or the command to open chrome(or other modern browsers)
 " if set, g:mkdp_browserfunc would be ignored
 
@@ -790,9 +793,21 @@ let g:SrcExpl_prevDefKey = "<F3>"
 let g:SrcExpl_nextDefKey = "<F4>"
 
 "easygrep
-let g:EasyGrepMode = 3     " All:0, Open Buffers:1, TrackExt:2, 
+let g:EasyGrepMode = 3     " All:0, Open Buffers:1, TrackExt:2,
 let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
 let g:EasyGrepRecursive  = 1 " Recursive searching
 let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
-let g:EasyGrepFilesToExclude = "*.bak, cscope.*, *.a, *.o, *.pyc"
+let g:EasyGrepFilesToExclude = "*.bak, *.o, *.pyc"
 let g:EasyGrepDefaultUserPattern = "*.c *.h *.s *.S"
+
+" markdown synatax
+let g:vim_marddown_folding_level = 6
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_auto_extension_ext = 'txt'
+
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
