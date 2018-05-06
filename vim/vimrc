@@ -103,7 +103,7 @@ Plug 'vim-scripts/vimprj'
 " 字符串全局搜索
 Plug 'dyng/ctrlsf.vim'
 " 多光标
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 " 智能注释
 Plug 'scrooloose/nerdcommenter'
 " 代码块补全
@@ -118,7 +118,7 @@ Plug 'gcmt/wildfire.vim'
 " 历史操作列表
 Plug 'sjl/gundo.vim'
 " Plug 'lilydjwg/fcitx.vim'
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
 
 " 为指定文本加括号
 Plug 'tpope/vim-surround'
@@ -130,7 +130,7 @@ Plug 'Chiel92/vim-autoformat'
 " 注释模板
 Plug 'vim-scripts/DoxygenToolkit.vim'
 " 显示函数参数
-Plug 'mbbill/echofunc'
+" Plug 'mbbill/echofunc'
 " 代码检测
 Plug 'w0rp/ale'
 " 自动加载搜索cscope文件
@@ -152,12 +152,13 @@ Plug 'iamcco/markdown-preview.vim'
 Plug 'wesleyche/SrcExpl'
 
 "搜索插件
-Plug 'dkprice/vim-easygrep'
+" Plug 'dkprice/vim-easygrep'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 
 " 有道翻译
 Plug 'ianva/vim-youdao-translater'
 
+Plug 'hyiltiz/vim-plugins-profile'
 " 插件列表结束
 call plug#end()
 filetype plugin indent on
@@ -212,6 +213,19 @@ set hlsearch
 
 " 设置 gvim 显示字体
 set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline\ 16
+
+let g:fullscreen = 0
+function! ToggleFullscreen()
+    if g:fullscreen == 1
+        let g:fullscreen = 0
+        let mod = "remove"
+    else
+        let g:fullscreen = 1
+        let mod = "add"
+    endif
+    call system("wmctrl -ir " . v:windowid . " -b " . mod . ",fullscreen")
+endfunction
+map <silent> <F11> :call ToggleFullscreen()<CR>
 
 " 禁止折行
 set nowrap
@@ -355,7 +369,7 @@ let g:tagbar_type_cpp = {
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-
+let g:indexer_disableCtagsWarning=1
 " 正向遍历同名标签
 nmap <Leader>tn :tnext<CR>
 " 反向遍历同名标签
@@ -383,7 +397,7 @@ let g:ctrlsf_ackprg = 'ag'
 " 内容替换
 
 " 快捷替换
-let g:multi_cursor_next_key='<S-x>'
+let g:multi_cursor_next_key='<S-n>'
 let g:multi_cursor_skip_key='<S-u>'
 
 " 精准替换
@@ -446,8 +460,8 @@ let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
 "" 引入 C++ 标准库 tags
-"set tags+=/data/misc/software/app/vim/stdcpp.tags
-"set tags+=/data/misc/software/app/vim/sys.tags
+set tags+=/home/work/.indexer_files_tags/stdcpp.tags
+" set tags+=/data/misc/software/app/vim/sys.tags
 
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
@@ -467,7 +481,7 @@ let g:ycm_cache_omnifunc=1
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 
-let g:ycm_server_python_interpreter='/usr/bin/python3.6'
+let g:ycm_server_python_interpreter='/usr/bin/python2.7'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 "离开插入模式后自动关闭预览窗口"
