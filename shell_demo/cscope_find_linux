@@ -1,0 +1,16 @@
+#!/bin/bash
+SRCDIR=/home/work/WorkSpace/imx6ull-board/src/imx6ull-linux-4.1.15
+cd /
+find $SRCDIR                                                                 \
+    -path "$SRCDIR/Documentation/*" -prune   -o                                        \
+    -path "$SRCDIR/security/*" -prune -o                                        \
+    -path "$SRCDIR/samples/*" -prune -o                                     \
+    -path "$SRCDIR/scripts/*" -prune -o                                     \
+    -path "$SRCDIR/tools/*" -prune -o                                         \
+    -path "$SRCDIR/arch/*" ! -path "$SRCDIR/arch/arm*" -prune -o             \
+    -path "$SRCDIR/arch/arm64/*" -prune -o                                         \
+    -path "$SRCDIR/arch/arm/cpu/*" ! -path "$SRCDIR/arch/arm/cpu/armv7*" -prune -o \
+    -name "*.[chxsS]" -print > $SRCDIR/cscope.files
+
+cd $SRCDIR
+cscope -bkq -i $SRCDIR/cscope.files
