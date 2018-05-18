@@ -1,23 +1,25 @@
 #!/bin/bash
-SRCDIR=/home/yjh/WorkSpace/u-boot-2016.11
+SRCDIR=/home/work/WorkSpace/source/imx6ull-u-boot-2016.03
 cd /
 find $SRCDIR                                                                 \
     -path "$SRCDIR/doc/*" -prune   -o                                        \
     -path "$SRCDIR/tools/*" -prune -o                                        \
     -path "$SRCDIR/examples/*" -prune -o                                     \
+    -path "$SRCDIR/scripts/*" -prune -o                                     \
     -path "$SRCDIR/Licenses/*" -prune -o                                     \
     -path "$SRCDIR/test/*" -prune -o                                         \
-    -path "$SRCDIR/board/*" ! -path "$SRCDIR/board/samsung*" -prune -o       \
-    -path "$SRCDIR/board/samsung/*" ! -path "$SRCDIR/board/samsung/common*"  \
-    ! -path "$SRCDIR/board/samsung/smdk2440*" -prune -o                      \
+    -path "$SRCDIR/board/*" ! -path "$SRCDIR/board/freescale*" -prune -o       \
+    -path "$SRCDIR/board/freescale/*" ! -path "$SRCDIR/board/freescale/common*"  \
+    ! -path "$SRCDIR/board/freescale/mx6ullevk*" -prune -o                      \
     -path "$SRCDIR/arch/*" ! -path "$SRCDIR/arch/arm*" -prune -o             \
     -path "$SRCDIR/arch/arm/*" ! -path "$SRCDIR/arch/arm/cpu*"               \
     ! -path "$SRCDIR/arch/arm/dts*" ! -path "$SRCDIR/arch/arm/imx-common*"   \
     ! -path "$SRCDIR/arch/arm/include*"  ! -path "$SRCDIR/arch/arm/lib*"     \
     ! -path "$SRCDIR/arch/arm/thubm1*" -prune -o                             \
-    -path "$SRCDIR/arch/arm/cpu/*" ! -path "$SRCDIR/arch/arm/cpu/arm920t*" -prune -o \
+    -path "$SRCDIR/arch/arm/cpu/*" ! -path "$SRCDIR/arch/arm/cpu/armv7*" -prune -o \
     -path "$SRCDIR/arch/arm/include/*" ! -path "$SRCDIR/arch/arm/include/asm*" -prune -o \
-    -path "$SRCDIR/arch/arm/include/asm/*" ! -path "$SRCDIR/arch/arm/include/asm/arch-s3c24x0*" -prune -o \
+    -path "$SRCDIR/arch/arm/include/asm/*" ! -path "$SRCDIR/arch/arm/include/asm/arch-mxs*" \
+    ! -path "$SRCDIR/arch/arm/include/asm/arch-mx6*" -prune -o \
     -name "*.[chxsS]" -print > $SRCDIR/cscope.files
 
 find $SRCDIR/arch/arm/include -maxdepth 2 -type f  -name "*.[chxsS]" -print >> $SRCDIR/cscope.files

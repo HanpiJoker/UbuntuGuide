@@ -1,5 +1,5 @@
 #!/bin/bash
-SRCDIR=/home/work/WorkSpace/imx6ull-board/src/imx6ull-linux-4.1.15
+SRCDIR=/home/work/WorkSpace/source/imx6ull-linux-4.1.15
 cd /
 find $SRCDIR                                                                 \
     -path "$SRCDIR/Documentation/*" -prune   -o                                        \
