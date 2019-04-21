@@ -1,8 +1,7 @@
-" 更新时间: 2017-12-03
+" 更新时间: 2019-1-25
 
 " 定义快捷键的前缀，即 <Leader>
 let mapleader=";"
-set conceallevel=2
 " 开启256色
 set t_Co=256
 " >>
@@ -85,21 +84,10 @@ set wildmenu
 " vundle 环境设置
 filetype off
 call plug#begin('~/.vim/plugged')
-" 状态栏及主题
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 " C++语法高亮
 Plug 'octol/vim-cpp-enhanced-highlight'
-" 书签
-Plug 'kshenoy/vim-signature'
-" 标识符列表
-Plug 'majutsushi/tagbar'
-" vim自动引入标签文件
-Plug 'vim-scripts/indexer.tar.gz'
-Plug 'vim-scripts/DfrankUtil'
-Plug 'vim-scripts/vimprj'
 " 多光标
-" Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 " 智能注释
 Plug 'scrooloose/nerdcommenter'
 " 代码块补全
@@ -107,25 +95,13 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " 代码补全
 Plug 'Valloric/YouCompleteMe'
-" 文件栏
-Plug 'scrooloose/nerdtree'
 " 快速选择结对符内文本
 Plug 'gcmt/wildfire.vim'
-" 历史操作列表
-Plug 'sjl/gundo.vim'
 " 为指定文本加括号
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " 自动格式化代码
 Plug 'Chiel92/vim-autoformat'
-" 代码检测
-Plug 'w0rp/ale'
-" 平滑滚动
-Plug 'terryma/vim-smooth-scroll'
-" 彩虹括号
-Plug 'kien/rainbow_parentheses.vim'
-" 快速移动
-Plug 'Lokaltog/vim-easymotion'
 " 插件列表结束
 call plug#end()
 filetype plugin indent on
@@ -133,7 +109,7 @@ filetype plugin indent on
 
 " 配色方案
 set background=dark
-" colorscheme 
+colorscheme solarized
 " 总是显示状态栏
 set laststatus=2
 
@@ -144,9 +120,6 @@ set ruler
 set number
 set relativenumber
 
-" 高亮显示当前行/列
-set cursorline
-set cursorcolumn
 " 高亮显示搜索结果
 set hlsearch
 " 禁止折行
@@ -173,100 +146,6 @@ set foldmethod=manual
 " set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
-
-" >>
-" 代码收藏
-
-" 自定义 vim-signature 快捷键
-let g:SignatureMap = {
-            \ 'Leader'             :  "m",
-            \ 'PlaceNextMark'      :  "m,",
-            \ 'ToggleMarkAtLine'   :  "m.",
-            \ 'PurgeMarksAtLine'   :  "m-",
-            \ 'DeleteMark'         :  "dm",
-            \ 'PurgeMarks'         :  "mda",
-            \ 'PurgeMarkers'       :  "m<BS>",
-            \ 'GotoNextLineAlpha'  :  "']",
-            \ 'GotoPrevLineAlpha'  :  "'[",
-            \ 'GotoNextSpotAlpha'  :  "`]",
-            \ 'GotoPrevSpotAlpha'  :  "`[",
-            \ 'GotoNextLineByPos'  :  "]'",
-            \ 'GotoPrevLineByPos'  :  "['",
-            \ 'GotoNextSpotByPos'  :  "mn",
-            \ 'GotoPrevSpotByPos'  :  "mp",
-            \ 'GotoNextMarker'     :  "[+",
-            \ 'GotoPrevMarker'     :  "[-",
-            \ 'GotoNextMarkerAny'  :  "]=",
-            \ 'GotoPrevMarkerAny'  :  "[=",
-            \ 'ListLocalMarks'     :  "ms",
-            \ 'ListLocalMarkers'   :  "m?"
-            \ }
-
-" <<
-
-" >>
-" 标签列表
-
-" 设置 tagbar 子窗口的位置出现在主编辑区的左边
-let tagbar_left=1
-" 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
-nnoremap <Leader>ilt :TagbarToggle<CR>
-" 设置标签子窗口的宽度
-let tagbar_width=35
-" tagbar 子窗口中不显示冗余帮助信息
-let g:tagbar_compact=1
-" 设置 ctags 对哪些代码标识符生成标签
-let g:tagbar_type_cpp = {
-            \ 'ctagstype' : 'c++',
-            \ 'kinds'     : [
-            \ 'c:classes:0:1',
-            \ 'd:macros:0:1',
-            \ 'e:enumerators:0:0',
-            \ 'f:functions:0:1',
-            \ 'g:enumeration:0:1',
-            \ 'l:local:0:1',
-            \ 'm:members:0:1',
-            \ 'n:namespaces:0:1',
-            \ 'p:functions_prototypes:0:1',
-            \ 's:structs:0:1',
-            \ 't:typedefs:0:1',
-            \ 'u:unions:0:1',
-            \ 'v:global:0:1',
-            \ 'x:external:0:1'
-            \ ],
-            \ 'sro'        : '::',
-            \ 'kind2scope' : {
-            \ 'g' : 'enum',
-            \ 'n' : 'namespace',
-            \ 'c' : 'class',
-            \ 's' : 'struct',
-            \ 'u' : 'union'
-            \ },
-            \ 'scope2kind' : {
-            \ 'enum'      : 'g',
-            \ 'namespace' : 'n',
-            \ 'class'     : 'c',
-            \ 'struct'    : 's',
-            \ 'union'     : 'u'
-            \ }
-            \ }
-
-" <<
-
-" >>
-" 代码导航
-
-" 基于标签的代码导航
-
-" 设置插件 indexer 调用 ctags 的参数
-" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v
-" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
-let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-let g:indexer_disableCtagsWarning=1
-" 正向遍历同名标签
-nmap <Leader>tn :tnext<CR>
-" 反向遍历同名标签
-nmap <Leader>tp :tprevious<CR>
 
 " 基于语义的代码导航
 
@@ -357,26 +236,6 @@ source $VIMRUNTIME/ftplugin/man.vim
 " 定义:Man命令查看各类man信息的快捷键
 nmap <Leader>man :Man 3 <cword><CR>
 
-" <<
-
-" >>
-" 工程文件浏览
-
-" 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nmap <Leader>fl :NERDTreeToggle<CR>
-" 设置 NERDTree 子窗口宽度
-let NERDTreeWinSize=35
-" 设置 NERDTree 子窗口位置
-let NERDTreeWinPos="right"
-" 显示隐藏文件
-let NERDTreeShowHidden=1
-" NERDTree 子窗口中不显示冗余帮助信息
-let NERDTreeMinimalUI=1
-" 删除文件时自动删除文件对应 buffer
-let NERDTreeAutoDeleteBuffer=1
-
-" >>
-" 快速选中结对符内的文本
 
 " 快捷键
 map <SPACE> <Plug>(wildfire-fuel)
@@ -385,94 +244,19 @@ vmap <S-SPACE> <Plug>(wildfire-water)
 " 适用于哪些结对符
 let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "i>", "ip"]
 
-" <<
-
-" 调用 gundo 树
-nnoremap <Leader>ud :GundoToggle<CR>
-
 " Nerdcommenter 配置
 let g:NERDSpaceDelims=1
 
 " auto-pairs 配置
 let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<C-b>'
-let g:AutoPairsShortcutJump = '<C-n>'
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:AutoPairsShortcutJump = '<M-n>'
 
 " vim-autoformat
 let g:formatdef_harttle = '"astyle --style=kr --pad-oper"'
 let g:formatters_cpp = ['harttle']
 let g:formatters_c = ['harttle']
 let g:formatters_java = ['harttle']
-noremap <F3> :Autoformat<CR>
-
-
-"ale
-" "始终开启标志列
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-let g:ale_set_highlights = 0
-let g:ale_linters = {'c': ['cppcheck'], }
-
-
-" airline 配置
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-"tabline中当前buffer两端的分隔字符
-let g:airline#extensions#tabline#left_sep = ':'
-"tabline中未激活buffer两端的分隔字符
-let g:airline#extensions#tabline#left_alt_sep = '|'
-"tabline中buffer显示编号
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bd :bd<CR>
-
-let g:airline_theme='cool'
-
-
-" vim-smooth-scroll
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-
-let g:rbpt_colorpairs = [
-            \['brown', 'RoyalBlue3'],
-            \['Darkblue', 'SeaGreen3'],
-            \['darkgray', 'DarkOrchid3'],
-            \['darkgreen', 'firebrick3'],
-            \['darkcyan', 'RoyalBlue3'],
-            \['darkred', 'SeaGreen3'],
-            \['darkmagenta', 'DarkOrchid3'],
-            \['brown', 'firebrick3'],
-            \['gray', 'RoyalBlue3'],
-            \['black', 'SeaGreen3'],
-            \['darkmagenta', 'DarkOrchid3'],
-            \['Darkblue', 'firebrick3'],
-            \['darkgreen', 'RoyalBlue3'],
-            \['darkcyan', 'SeaGreen3'],
-            \['darkred', 'DarkOrchid3'],
-            \['red', 'firebrick3'],
-            \]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle=0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-
-
-let g:EasyMotion_smartcase = 1
-"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-map <Leader><leader>h <Plug>(easymotion-linebackward)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><leader>l <Plug>(easymotion-lineforward)
-" 重复上一次操作, 类似repeat插件, 很强大
-map <Leader><leader>. <Plug>(easymotion-repeat)
 " Multip Cursor 
 " Default key mapping  
 let g:multi_cursor_next_key='<C-n>'  
