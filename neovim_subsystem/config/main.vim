@@ -1,4 +1,3 @@
-" Update: 2019-04-22 14:42
 " 定义快捷键的前缀，即 <Leader>
 let mapleader=";"
 " 开启256色

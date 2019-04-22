@@ -1,5 +1,4 @@
 " 模板补全
-" Update: 2019-04-22 14:41
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 let g:UltiSnipsExpandTrigger="<leader><tab>"
@@ -11,8 +10,7 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 source $VIMRUNTIME/ftplugin/man.vim
 
 " 定义:Man命令查看各类man信息的快捷键
-nmap <Leader>man :Man 3 <cword><CR>
-
+nmap <Leader>man :Man 3 <C-R>=expand("<cword>")<CR><CR>
 
 " 快捷键
 map <SPACE> <Plug>(wildfire-fuel)

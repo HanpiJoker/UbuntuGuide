@@ -1,4 +1,4 @@
-" 更新时间: 2019-4-22
+" 更新时间: 2019-1-25
 
 execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/main.vim'
 let complete = "NCM2"
@@ -56,7 +56,7 @@ if complete == "NCM2"
     let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib'
 
     autocmd BufEnter * call ncm2#enable_for_buffer()
-
+    let ncm2#complete_length = [[1, 1]]
 elseif complete == "YCM"
     if filereadable(fnamemodify(expand('<sfile>'), ':h').'/config/ycm.vim')
         execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/ycm.vim'
