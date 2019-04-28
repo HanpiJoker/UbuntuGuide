@@ -1,7 +1,9 @@
 " 更新时间: 2019-1-25
 
 execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/main.vim'
-let complete = "NCM2"
+
+" Can be changed by COC for coc.vim; NCM2 for ncm2; YCM for YouCompleteMe
+let complete = "COC" 
 
 " 插件安装
 call plug#begin('~/.config/nvim/plugged')
@@ -27,10 +29,13 @@ if complete == "NCM2"
     Plug 'ncm2/ncm2-jedi'
     Plug 'ncm2/ncm2-vim' 
     Plug 'Shougo/neco-vim'
-    Plug 'ncm2/float-preview.nvim'
+    " Plug 'ncm2/float-preview.nvim'
 elseif complete == "YCM"
     Plug 'Valloric/YouCompleteMe'
+elseif complete == "COC"
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 endif
+Plug 'easymotion/vim-easymotion'
 " 快速选择结对符内文本
 Plug 'gcmt/wildfire.vim'
 " 为指定文本加括号
@@ -56,10 +61,14 @@ if complete == "NCM2"
     let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib'
 
     autocmd BufEnter * call ncm2#enable_for_buffer()
-    let ncm2#complete_length = [[1, 1]]
+
 elseif complete == "YCM"
     if filereadable(fnamemodify(expand('<sfile>'), ':h').'/config/ycm.vim')
         execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/ycm.vim'
+    endif
+elseif complete == "COC"
+    if filereadable(fnamemodify(expand('<sfile>'), ':h').'/config/coc.vim')
+        execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/coc.vim'
     endif
 endif
 unlet! complete
