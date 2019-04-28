@@ -12,7 +12,7 @@ filetype on
 filetype plugin on
 " 配色方案
 set background=dark
-colorscheme solarized
+colorscheme desert256
 " 开启行号显示
 set number
 set relativenumber

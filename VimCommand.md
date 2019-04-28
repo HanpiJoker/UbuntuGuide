@@ -105,10 +105,3 @@ O/o   -- insert new line above/below current line and insert
 
 **It's so interesting!!** 
 
-### 3. Plugins
-Some Great Plugins I use:
-> vundle    -- plugin manager
-> nerdtree  -- file drawer
-> ctrlp     -- fuzzy file finder
-> fugitive  -- git tool
-> syntastic -- syntax checker/linter (I use the YCM which supports syntastic well)

@@ -29,7 +29,7 @@ if complete == "NCM2"
     Plug 'ncm2/ncm2-jedi'
     Plug 'ncm2/ncm2-vim' 
     Plug 'Shougo/neco-vim'
-    " Plug 'ncm2/float-preview.nvim'
+    Plug 'ncm2/float-preview.nvim'
 elseif complete == "YCM"
     Plug 'Valloric/YouCompleteMe'
 elseif complete == "COC"
@@ -48,6 +48,17 @@ call plug#end()
 
 execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/plugin.vim'
 
+" 补全菜单颜色
+highlight Pmenu ctermfg=33 ctermbg=7 guifg=#005f87 guibg=#EEE8D5
+" 选中项
+highlight PmenuSel ctermfg=51 ctermbg=61 guifg=#AFD700 guibg=#106900
+" 引入 C++ 标准库 tags
+set tags+=/usr/include/c++/7/stdcpp.tags
+set tags+=/usr/include/sys.tags
+
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+
 if complete == "NCM2"
     set shortmess+=c      
     inoremap <c-c> <ESC>
@@ -59,7 +70,7 @@ if complete == "NCM2"
 
     " path to directory where libclang.so can be found
     let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib'
-
+    let g:float_preview#docked = 0
     autocmd BufEnter * call ncm2#enable_for_buffer()
 
 elseif complete == "YCM"

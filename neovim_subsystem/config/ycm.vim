@@ -15,9 +15,6 @@ let g:ycm_confirm_extra_conf=0
 
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
-"" 引入 C++ 标准库 tags
-set tags+=/usr/include/c++/7/stdcpp.tags
-set tags+=/usr/include/sys.tags
 
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
