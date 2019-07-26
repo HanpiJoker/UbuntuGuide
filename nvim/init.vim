@@ -7,6 +7,8 @@ let complete = "COC"
 
 " 插件安装
 call plug#begin('~/.config/nvim/plugged')
+" Error Check
+Plug 'dense-analysis/ale'
 " C++语法高亮
 Plug 'octol/vim-cpp-enhanced-highlight'
 " 多光标
@@ -29,7 +31,7 @@ if complete == "NCM2"
     Plug 'ncm2/ncm2-jedi'
     Plug 'ncm2/ncm2-vim' 
     Plug 'Shougo/neco-vim'
-    Plug 'ncm2/float-preview.nvim'
+    " Plug 'ncm2/float-preview.nvim'
 elseif complete == "YCM"
     Plug 'Valloric/YouCompleteMe'
 elseif complete == "COC"
@@ -43,6 +45,27 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " 自动格式化代码
 Plug 'Chiel92/vim-autoformat'
+" Status Line Plugin
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+" 项目效率插件
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'scrooloose/nerdtree'
+Plug 'wesleyche/SrcExpl'
+Plug 'junegunn/fzf.vim'
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'plasticboy/vim-markdown'
+Plug 'vimwiki/vimwiki'
+Plug 'joker1007/vim-markdown-quote-syntax'
+
+" Other 
+Plug 'junegunn/goyo.vim'
+Plug 'voldikss/vim-translate-me'
+Plug 'dyng/ctrlsf.vim'
 " 插件列表结束
 call plug#end()
 
@@ -52,9 +75,6 @@ execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/plugin.vim'
 highlight Pmenu ctermfg=33 ctermbg=7 guifg=#005f87 guibg=#EEE8D5
 " 选中项
 highlight PmenuSel ctermfg=51 ctermbg=61 guifg=#AFD700 guibg=#106900
-" 引入 C++ 标准库 tags
-set tags+=/usr/include/c++/7/stdcpp.tags
-set tags+=/usr/include/sys.tags
 
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview

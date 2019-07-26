@@ -1,7 +1,7 @@
 " 定义快捷键的前缀，即 <Leader>
 let mapleader=";"
-" 开启256色
-set t_Co=256
+" 开启256色 set t_Co=256
+
 " >>
 " 文件类型侦测
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -10,14 +10,15 @@ set termencoding=utf-8
 filetype on
 " 根据侦测到的不同类型加载对应的插件
 filetype plugin on
-" 配色方案
-set background=dark
-colorscheme desert256
 " 开启行号显示
 set number
 set relativenumber
+" 高亮当前行
+set cursorline
 " 禁止折行
 set nowrap
+" 自动换行
+" set textwidth=70
 " 开启语法高亮功能
 syntax enable
 " 允许用指定语法高亮配色方案替换默认方案
@@ -34,7 +35,6 @@ set shiftwidth=4
 " 让 vim 把连续数量的空格视为一个制表符
 set softtabstop=4
 
-
 " 基于缩进或语法进行代码折叠
 " set foldmethod=manual
 set foldmethod=syntax
@@ -42,6 +42,11 @@ set foldmethod=syntax
 set nofoldenable
 
 set completeopt=noinsert,menuone,noselect      
+
+" 配色方案
+" set background=dark
+colorscheme lucius
+" hi Normal ctermbg=NONE
 " >>
 " vim 自身（非插件）快捷键
 " 插入模式下的快捷移动
@@ -97,3 +102,37 @@ nmap <Leader><Leader>l <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+
+nmap <leader>bn :bn<CR>
+nmap <leader>bp :bp<CR>
+nmap <leader>bd :bd<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 引入 C++ 标准库 tags
+set tags+=/usr/include/c++/9.1.0/stdcpp.tags
+set tags+=/usr/include/sys.tags
+if has("cscope")
+  set csprg=/usr/bin/cscope
+  set csto=1
+  set cst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope/cscope.out")
+      cs add ./cscope/cscope.out
+  endif
+  set csverb
+"  set cscopequickfix=g-,c-,d-,i-,t-,e-,s-
+endif
+
+nmap <C-s>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-s>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-s>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-s>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-s>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-s>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-s>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-s>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+au! BufRead,BufNewFile *.markdown set filetype=markdown
+au! BufRead,BufNewFile *.md set filetype=markdown

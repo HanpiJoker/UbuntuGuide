@@ -1,3 +1,4 @@
 #!/bin/bash
-find -name '*.c' -o -name '*.s' -o -name '*.S' -o -name '*.h' > cscope.files
-cscope -bkq -i cscope.files
+echo $PWD
+find $PWD -name '*.c' -o -name '*.s' -o -name '*.S' -o -name '*.h' > cscope.files
+cscope -Rbkq -i cscope.files
